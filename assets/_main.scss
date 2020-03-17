@@ -1,0 +1,18 @@
+.v-application--wrap{
+  background-image: url("../static/main-page-back.jpg");
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  background-position: center, center;
+}
+#main-page{
+  min-width: 100vw;
+  min-height: calc(100vh - 64px);
+  margin: 0;
+  padding: 0;
+  a{
+    .main-page-link{
+      height: calc(100vh - 64px);
+      width: 100vw;
+    }
+  }
+}
