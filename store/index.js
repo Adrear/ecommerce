@@ -7,6 +7,21 @@ export const strict = false
 Object.defineProperty(Vue.prototype, '$_', { value: _ })
 
 export const state = () => ({
+  locales: [
+    {
+      code: 'ua',
+      name: 'UA'
+    },
+    {
+      code: 'ru',
+      name: 'RU'
+    },
+    {
+      code: 'en',
+      name: 'EN'
+    }
+  ],
+  locale: 'ua',
   all: [],
   categories: [],
   inCart: []
@@ -26,7 +41,7 @@ export const actions = {
   async getItems (context) {
     const data = await itemsAPI.getItems()
     data.forEach((el) => {
-      el.image = el.images[0]
+      el.image = el.images ? el.images[0] : ''
     })
     context.commit('SET_ITEMS', data)
   },

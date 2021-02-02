@@ -1,18 +1,159 @@
-.v-application--wrap{
-  background-image: url("../static/main-page-back.jpg");
-  background-repeat: no-repeat;
-  background-size: auto 100%;
-  background-position: center, center;
+@import "imports/mixins";
+@import "imports/fonts";
+
+.v-content{
+  z-index: 1;
 }
-#main-page{
-  min-width: 100vw;
-  min-height: calc(100vh - 64px);
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+* {
+  outline: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+html, body {
   margin: 0;
   padding: 0;
-  a{
-    .main-page-link{
-      height: calc(100vh - 64px);
-      width: 100vw;
+}
+h1, h2, h3{
+  margin: 0;
+}
+
+button:focus, label:focus, select:focus, input:focus, textarea:focus{
+  outline:0;
+}
+
+//a
+a, a:hover{
+  text-decoration: none;
+  color: black !important;
+  transition: all 0.3s;
+}
+a.red-btn, input.red-btn{
+  background-color: #fc0000;
+  border: 1px solid #fc0000;
+  border-radius: 0;
+  color: black;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  width: 200px;
+  cursor: pointer;
+  transition: all 0.25s linear;
+  &:hover{
+    transform: scale(1.01);
+    outline: 0;
+  }
+}
+
+//classes
+.hidden{
+  display: none;
+}
+.err{
+  color: red;
+}
+
+.animation-cubic {
+  transition: transform 0.55s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.cart .page, .cart #sidebar{
+  -ms-transform: translateX(-400px);
+  -webkit-transform: translateX(-400px);
+  transform: translateX(-400px);
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top:0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 998;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+  &.active {
+    display: block;
+    opacity: 1;
+  }
+}
+
+// FONTS
+
+html, body {
+  font: 16px/24px 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  h1 {
+    font-size: 20px;
+    line-height: 60px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  h2 {
+    font-size: 20px;
+    line-height: 45px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  h3 {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  p, li{
+    font-size: 16px;
+  }
+  label, input, textarea, select, button{
+    text-indent: 0.01px;
+    font-size: 16px;
+  }
+}
+
+@include bp(500, max) {
+  html, body {
+    font: 12px/16px 'Montserrat', sans-serif;
+    h1 {
+      font-size: 18px;
+    }
+    h2 {
+      font-size: 14px;
+    }
+    h3 {
+      font-size: 12px;
+    }
+    p,li {
+      font-size: 12px;
+    }
+    label, input, textarea, select, button{
+      font-size: 12px;
     }
   }
+}
+
+//END FONTS
+
+//ARROW
+
+i.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
 }

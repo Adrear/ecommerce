@@ -8,12 +8,14 @@
           item-text="name"
           item-value="id"
           return-object
+          @change="goto"
         />
       </div>
     </div>
     <div class="row">
       <Item
         v-for="item in all.filter(collection)"
+        :id="item.id"
         :key="item.id"
       />
     </div>
@@ -26,6 +28,10 @@ import Item from '@/components/Item.vue'
 export default {
   components: {
     Item
+  },
+  fetch ({ store }) {
+    store.dispatch('getItems')
+    store.dispatch('getCategories')
   },
   data () {
     return {
@@ -43,16 +49,15 @@ export default {
       return [].concat(this.$store.state.categories, this.filter)
     }
   },
-  fetch ({ store }) {
-    store.dispatch('getItems')
-    store.dispatch('getCategories')
-  },
   created () {
   },
   methods: {
     collection (value) {
       if (this.filter.id === 0) { return value }
       if (this.filter.id === value.categorySubId) { return value }
+    },
+    goto () {
+      this.$router.push(`/collections/${this.filter.id}`)
     }
   }
 }

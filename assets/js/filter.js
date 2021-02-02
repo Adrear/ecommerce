@@ -1,6 +1,6 @@
 // import fns from 'date-fns'
 
-const dollars = num => ((typeof num === 'string') ? num : `₴ ${num / 100}`)
+const dollars = num => `₴ ${num}`
 // const timestamp = str => (str ? str.substr(0, 2) + ':' + str.substr(2, 2) : str)
 
 // const date = (date) => {

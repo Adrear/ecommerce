@@ -30,6 +30,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '@/plugins/i18n.js',
+    '@/plugins/localStorage.js'
   ],
   /*
   ** Nuxt.js dev-modules

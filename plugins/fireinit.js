@@ -1,6 +1,8 @@
-import firebase from 'firebase'
-import 'firebase/auth'
-import 'firebase/database'
+import * as firebase from 'firebase/app'
+
+require('firebase/auth')
+require('firebase/firestore')
+require('firebase/storage')
 
 const config = {
   apiKey: 'AIzaSyAeNgPOWzbmrQ8AR-CaHQ0cgzuujOkwVx0',
@@ -14,7 +16,12 @@ const config = {
 
 if (!firebase.apps.length) { firebase.initializeApp(config) }
 
+firebase.auth().signInWithEmailAndPassword('advitam@admin.com', 'advitam007').catch((error) => {
+  alert(error)
+})
+
 export const auth = firebase.auth()
 export const db = firebase.firestore()
 export const storage = firebase.storage
+
 export default firebase

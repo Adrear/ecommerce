@@ -1,71 +1,61 @@
 <template>
   <v-app>
-    <v-app-bar fixed app>
-      <button
-        :class="{ 'is-active': menu}"
-        class="hamburger hamburger--elastic"
-        type="button"
+    <v-app-bar fixed app color="white">
+      <v-btn
+        icon
         @click.stop="menu = !menu"
       >
-        <span class="hamburger-box">
-          <span class="hamburger-inner" />
-        </span>
-      </button>
+        <v-icon>mdi-menu</v-icon>
+      </v-btn>
       <v-spacer />
-      <v-toolbar-title v-text="title" />
+      <v-img src="/logo.png" max-width="180px" style="cursor: pointer" @click="$router.push('/')" />
       <v-spacer />
       <v-btn
         icon
         @click.stop="cart = !cart"
       >
-        <v-icon>mdi-menu</v-icon>
+        <v-icon>shopping_cart</v-icon>
       </v-btn>
     </v-app-bar>
-    <v-content>
+    <v-content class="wrapper">
       <nuxt />
     </v-content>
+    <Footer />
     <v-navigation-drawer
       v-model="cart"
-      temporary
+      app
       fixed
+      temporary
       right
+      width="400"
     >
-      <v-list>
-        <v-list-item>
-          <v-list-item-action>
-            <v-icon light>
-              mdi-repeat
-            </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
+      <Cart />
     </v-navigation-drawer>
     <template v-if="menu">
       <div class="menu">
         <div>
-          <nuxt-link :to="localePath('collections')">
+          <nuxt-link :to="{ name: 'collections', params: {lang: $route.params.lang, name: 'all' }}">
             {{ $t('header.menu1') }}
           </nuxt-link>
         </div>
         <div>
-          <nuxt-link :to="localePath('about')">
+          <nuxt-link :to="{ name: 'about', params: { lang: $route.params.lang }}">
             {{ $t('header.menu3') }}
           </nuxt-link>
         </div>
         <div>
-          <nuxt-link :to="localePath('contacts')">
+          <nuxt-link :to="{ name: 'contacts', params: { lang: $route.params.lang }}">
             {{ $t('header.menu4') }}
           </nuxt-link>
         </div>
         <div>
-          <nuxt-link
+          <v-btn
             v-for="locale in availableLocales"
             :key="locale.code"
-            :to="switchLocalePath(locale.code)"
+            @click="switchLanguage(locale.code)"
           >
             {{ locale.name }}
-          </nuxt-link>
+          </v-btn>
         </div>
       </div>
     </template>
@@ -73,20 +63,31 @@
 </template>
 
 <script>
+import Footer from '~/components/Footer.vue'
+import Cart from '~/components/Cart.vue'
+
 export default {
+  components: {
+    Cart,
+    Footer
+  },
   data () {
     return {
       cart: false,
-      menu: false,
-      title: 'Advitam'
+      menu: false
     }
   },
   computed: {
     availableLocales () {
-      return this.$i18n.locales.filter(i => i.code !== this.$i18n.locale)
+      return this.$store.state.locales.filter(i => i.code !== this.$i18n.locale)
     }
   },
   methods: {
+    switchLanguage (localeCode) {
+      if (localeCode === this.locale) { return }
+      document.cookie = `locale=${localeCode}`
+      location.reload()
+    }
   }
 }
 </script>

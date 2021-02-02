@@ -1,7 +1,7 @@
 <template>
   <div class="col-md-4">
     <div class="card">
-      <nuxt-link :to="localePath(`items/${id}`)">
+      <nuxt-link :to="`/items/${id}`">
         <img :src="item.image" :alt="item.name" class="card-img-top scale">
       </nuxt-link>
       <div class="card-body">
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { dollars } from '~/assets/js/filters'
+import { dollars } from '~/assets/js/filter'
 
 export default {
   name: 'Item',
@@ -25,7 +25,7 @@ export default {
     dollars
   },
   props: {
-    key: {
+    id: {
       type: String,
       default: ''
     }
@@ -36,19 +36,10 @@ export default {
   },
   computed: {
     item () {
-      return this.$store.state.all.find(el => el.id === this.key)
+      return this.$store.state.all.find(el => el.id === this.id)
     }
   },
   methods: {
-    getImagePath (img) {
-      let src
-      try {
-        src = require('../' + img)
-      } catch (e) {
-        src = '/static/no-image.png'
-      }
-      return src
-    },
     addToCart (id) {
       this.$store.dispatch('addToCart', id)
     }

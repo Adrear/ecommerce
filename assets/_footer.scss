@@ -1,0 +1,66 @@
+.cart .footer {
+}
+
+.footer {
+  a {
+    color: white !important;
+  }
+  position: fixed;
+  height: 260px;
+  z-index: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000;
+  color: #fff;
+  padding: 40px 0;
+  text-align: left;
+  &__ins {
+    zoom: 1;
+    max-width: 980px;
+    padding: 0 20px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  &__wr {
+    margin-bottom: 20px;
+  }
+  &__list {
+    display: inline-block;
+    padding: 0 20px 0 0;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  &__label {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .input-group {
+    border-bottom: 2px solid #fff;
+    display: flex;
+    &__field {
+      background-color: black;
+      border: none;
+      color: white;
+      font-size: 14px;
+      line-height: 18px;
+      padding: 10px;
+      width: 50%;
+    }
+    &__field[type="submit"]:hover {
+      opacity: 0.5;
+      cursor: pointer;
+    }
+  }
+  .icon {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
+  }
+}
